@@ -1,4 +1,4 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/767f5835-23d6-49bb-b9ea-128c3bafde3f/deploy-status)](https://app.netlify.com/sites/angry-mestorf-f3e521/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/767f5835-23d6-49bb-b9ea-128c3bafde3f/deploy-status)](https://app.netlify.com/sites/homeofrec/deploys))
 
 # Home of Recreation
 
