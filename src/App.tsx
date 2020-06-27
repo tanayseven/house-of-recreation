@@ -5,23 +5,23 @@ import Chat from './Chat';
 import Pictionary from './Pictionary';
 import About from './About';
 
-function App() {
-  return (
-    <HashRouter>
-      <Route exact path="/">
-        <Home />
-      </Route>
-      <Route path="/chat">
-        <Chat />
-      </Route>
-      <Route path="/pictionary">
-        <Pictionary />
-      </Route>
-      <Route path="/about">
-        <About />
-      </Route>
-    </HashRouter>
-  );
+function App(): JSX.Element {
+    return (
+        <HashRouter>
+            <Route exact path="/">
+                <Home />
+            </Route>
+            <Route path="/chat">
+                <Chat />
+            </Route>
+            <Route path="/pictionary">
+                <Pictionary />
+            </Route>
+            <Route path="/about">
+                <About />
+            </Route>
+        </HashRouter>
+    );
 }
 
 export default App;
