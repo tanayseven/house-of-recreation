@@ -1,4 +1,5 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/767f5835-23d6-49bb-b9ea-128c3bafde3f/deploy-status)](https://app.netlify.com/sites/homeofrec/deploys))
+[![Netlify Status](https://api.netlify.com/api/v1/badges/767f5835-23d6-49bb-b9ea-128c3bafde3f/deploy-status)](https://app.netlify.com/sites/homeofrec/deploys)
+[![Build Status](https://travis-ci.org/tanayseven/house-of-recreation.svg?branch=master)](https://travis-ci.org/tanayseven/house-of-recreation)
 
 # Home of Recreation
 
@@ -10,7 +11,6 @@
 - Testing with react-testing-library
 - WebTorrent for real time P2P socket communication
 - React-Router to run the applicaiton as SPA
-- 
 
 ### Commands
 ```bash
