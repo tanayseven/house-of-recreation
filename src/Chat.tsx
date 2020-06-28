@@ -1,16 +1,26 @@
 import React, { Component, KeyboardEvent } from 'react';
+const P2PT = require('p2pt'); // eslint-disable-line
 
-class Chat extends Component<Record<string, unknown>, ChatState> {
-    constructor(props: Record<string, unknown>) {
+class Chat extends Component<Props, State> {
+    constructor(props: Props) {
         super(props);
+        const announceURLs = [
+            'wss://tracker.openwebtorrent.com',
+            'wss://tracker.sloppyta.co:443/announce',
+            'wss://tracker.novage.com.ua:443/announce',
+            'wss://tracker.btorrent.xyz:443/announce',
+        ];
         this.state = {
             chatMessages: ['--- Start of chat ---'],
+            peers: {},
+            p2pt: new P2PT(announceURLs, 'p2chat' + this.props.roomName),
         };
         this.keyPressedInChatInput = this.keyPressedInChatInput.bind(this);
     }
     keyPressedInChatInput(event: KeyboardEvent<HTMLInputElement>): void {
         const element = event.target as HTMLInputElement;
         if (event.key === 'Enter') {
+            this.state.p2pt.send();
             this.state.chatMessages.push(element.value);
             console.log(element.value);
             this.setState({ chatMessages: this.state.chatMessages });
@@ -36,8 +46,14 @@ class Chat extends Component<Record<string, unknown>, ChatState> {
     }
 }
 
-interface ChatState {
+interface State {
     chatMessages: string[];
+    peers: any;// eslint-disable-line
+    p2pt: any;// eslint-disable-line
+}
+
+interface Props {
+    roomName: string;
 }
 
 export default Chat;

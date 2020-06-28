@@ -12,7 +12,7 @@ function App(): JSX.Element {
                 <Home />
             </Route>
             <Route path="/chat">
-                <Chat />
+                <Chat roomName="lobby" />
             </Route>
             <Route path="/pictionary">
                 <Pictionary />
