@@ -1,6 +1,6 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/767f5835-23d6-49bb-b9ea-128c3bafde3f/deploy-status)](https://app.netlify.com/sites/homeofrec/deploys)
 [![Build Status](https://travis-ci.org/tanayseven/house-of-recreation.svg?branch=master)](https://travis-ci.org/tanayseven/house-of-recreation)
-[![Production Status](https://homeofrec.netlify.app/#/)](https://img.shields.io/website?down_color=red&down_message=Production%20is%20Down&up_color=green&up_message=Production%20is%20Up&url=https%3A%2F%2Fhomeofrec.netlify.app%2F)
+[![Production Status](https://img.shields.io/website?down_color=red&down_message=Production%20is%20Down&up_color=green&up_message=Production%20is%20Up&url=https%3A%2F%2Fhomeofrec.netlify.app%2F)](https://homeofrec.netlify.app/#/)
 
 # Home of Recreation
 
