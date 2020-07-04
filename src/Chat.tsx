@@ -13,14 +13,37 @@ class Chat extends Component<Props, State> {
         this.state = {
             chatMessages: ['--- Start of chat ---'],
             peers: {},
-            p2pt: new P2PT(announceURLs, 'p2chat' + this.props.roomName),
+            p2pt: new P2PT(announceURLs, 'wow!-whaat?' + this.props.roomName),
         };
         this.keyPressedInChatInput = this.keyPressedInChatInput.bind(this);
+        this.state.p2pt.on('peerconnect', (peer: any) => {// eslint-disable-line
+            const peers = this.state.peers;
+            peers[peer.id] = peer;
+            this.state.chatMessages.push('Peer connected ' + JSON.stringify(peer.id));
+            this.setState({ peers: this.state.peers, chatMessages: this.state.chatMessages });
+            console.log(JSON.stringify(this.state.peers));
+        });
+        this.state.p2pt.on('msg', (peer: any, msg: any) => {// eslint-disable-line
+            const msgParsed = JSON.parse(msg);
+            this.state.chatMessages.push(`Received message`);
+            this.state.chatMessages.push(`${JSON.stringify(msgParsed)}`);
+            this.setState({ chatMessages: this.state.chatMessages });
+        });
+        this.state.p2pt.on('peerclose', (peer: any) => {// eslint-disable-line
+            const peers = this.state.peers;
+            delete peers[peer.id];
+            const chatMessages = this.state.chatMessages;
+            chatMessages.push(`peer ${JSON.stringify(peer)} left`);
+            this.setState({ peers: peers, chatMessages: chatMessages });
+        });
+        this.state.p2pt.start();
     }
     keyPressedInChatInput(event: KeyboardEvent<HTMLInputElement>): void {
         const element = event.target as HTMLInputElement;
-        if (event.key === 'Enter') {
-            this.state.p2pt.send();
+        if (event.key === 'Enter' && element.value !== '') {
+            for (const key in this.state.peers) {
+                this.state.p2pt.send(this.state.peers[key], JSON.stringify({ msg: element.value }));
+            }
             this.state.chatMessages.push(element.value);
             console.log(element.value);
             this.setState({ chatMessages: this.state.chatMessages });
