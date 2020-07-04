@@ -17,25 +17,26 @@ class Chat extends Component<Props, State> {
         };
         this.keyPressedInChatInput = this.keyPressedInChatInput.bind(this);
         this.state.p2pt.on('peerconnect', (peer: any) => {// eslint-disable-line
-            const peers = this.state.peers;
+            const peers = { ...this.state.peers };
             peers[peer.id] = peer;
             this.state.chatMessages.push('Peer connected ' + JSON.stringify(peer.id));
-            this.setState({ peers: this.state.peers, chatMessages: this.state.chatMessages });
+            this.setState({ peers: peers, chatMessages: this.state.chatMessages });
             console.log(JSON.stringify(this.state.peers));
         });
         this.state.p2pt.on('msg', (peer: any, msg: any) => {// eslint-disable-line
             const msgParsed = JSON.parse(msg);
-            this.state.chatMessages.push(`Received message`);
-            this.state.chatMessages.push(`${JSON.stringify(msgParsed)}`);
+            this.state.chatMessages.push(`Received: ${JSON.stringify(msgParsed)}`);
             this.setState({ chatMessages: this.state.chatMessages });
         });
         this.state.p2pt.on('peerclose', (peer: any) => {// eslint-disable-line
-            const peers = this.state.peers;
+            const peers = { ...this.state.peers };
             delete peers[peer.id];
             const chatMessages = this.state.chatMessages;
-            chatMessages.push(`peer ${JSON.stringify(peer)} left`);
+            chatMessages.push(`peer ${JSON.stringify(peer.id)} left`);
             this.setState({ peers: peers, chatMessages: chatMessages });
         });
+    }
+    componentDidMount(): void {
         this.state.p2pt.start();
     }
     keyPressedInChatInput(event: KeyboardEvent<HTMLInputElement>): void {
@@ -57,9 +58,10 @@ class Chat extends Component<Props, State> {
         return (
             <div>
                 <h1>House of Recreation</h1>
+                <p>Users online: {Object.keys(this.state.peers).map((key, _) => `${key}, `)}</p>
                 <div>
                     <p>Chat</p>
-                    <div style={{ height: '300px', border: '1px solid black' }}>
+                    <div style={{ minHeight: '300px', border: '1px solid black' }}>
                         <ul>{chatMessagesList}</ul>
                     </div>
                     <input type="text" id="chat-send" onKeyPress={this.keyPressedInChatInput} />
