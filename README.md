@@ -10,8 +10,9 @@
 
 - Typescript for type-safe coding
 - Testing with react-testing-library
-- WebTorrent for real time P2P socket communication
+- Decentralized and distributed working with P2P communication using p2pt
 - React-Router to run the applicaiton as SPA
+- Styling and theming using styled-components
 
 ### Commands
 ```bash
