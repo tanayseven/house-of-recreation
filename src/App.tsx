@@ -1,7 +1,7 @@
 import React from 'react';
 import { HashRouter, Route } from 'react-router-dom';
 import Home from './Home';
-import Chat from './Chat';
+import Codewords from './Codewords';
 import Pictionary from './Pictionary';
 import About from './About';
 
@@ -12,7 +12,7 @@ function App(): JSX.Element {
                 <Home />
             </Route>
             <Route path="/chat">
-                <Chat roomName="this-is-some-random-room-abcdefgh" />
+                <Codewords roomName="this-is-some-random-room-abcdefgh" />
             </Route>
             <Route path="/pictionary">
                 <Pictionary />

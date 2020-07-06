@@ -1,7 +1,7 @@
 import React, { Component, KeyboardEvent } from 'react';
 const P2PT = require('p2pt'); // eslint-disable-line
 
-class Chat extends Component<Props, State> {
+class Codewords extends Component<Props, State> {
     constructor(props: Props) {
         super(props);
         const announceURLs = [
@@ -81,4 +81,4 @@ interface Props {
     roomName: string;
 }
 
-export default Chat;
+export default Codewords;
