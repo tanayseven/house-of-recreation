@@ -11,7 +11,7 @@ function App(): JSX.Element {
             <Route exact path="/">
                 <Home />
             </Route>
-            <Route path="/chat">
+            <Route path="/codewords">
                 <Codewords roomName="this-is-some-random-room-abcdefgh" />
             </Route>
             <Route path="/pictionary">

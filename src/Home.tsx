@@ -17,8 +17,8 @@ function Home(): JSX.Element {
                 <label htmlFor="room-type">Create a Room</label>
                 <select name="room-types" id="room-type" onChange={roomSelect}>
                     <option value="">Select an option</option>
-                    <option value="chat">Chat</option>
-                    <option value="pictionary">Pictionary</option>
+                    <option value="codewords">Codewords</option>
+                    <option value="pictionary">Pictionary (Work in Progress)</option>
                 </select>
                 <p>
                     <Link to="/about">About</Link>

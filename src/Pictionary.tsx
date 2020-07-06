@@ -5,7 +5,7 @@ function Pictionary(): JSX.Element {
         <div>
             <h1>House of Recreation</h1>
             <div>
-                <p>Pictionary</p>
+                <p>Pictionary (this is currently under construction)</p>
             </div>
         </div>
     );
