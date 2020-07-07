@@ -20,6 +20,8 @@ function Home(): JSX.Element {
                     <option value="codewords">Codewords</option>
                     <option value="pictionary">Pictionary (Work in Progress)</option>
                 </select>
+                <input type="text" placeholder="user_name" />
+                <input type="text" placeholder="room_name" />
                 <p>
                     <Link to="/about">About</Link>
                 </p>

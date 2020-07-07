@@ -1,4 +1,5 @@
 import React, { Component, KeyboardEvent } from 'react';
+import { Room } from './Room';
 const P2PT = require('p2pt'); // eslint-disable-line
 
 class Codewords extends Component<Props, State> {
@@ -13,7 +14,7 @@ class Codewords extends Component<Props, State> {
         this.state = {
             chatMessages: ['--- Start of chat ---'],
             peers: {},
-            p2pt: new P2PT(announceURLs, 'wow!-whaat?' + this.props.roomName),
+            p2pt: new P2PT(announceURLs, 'com.tanayseven.house-of-rec' + this.props.roomName),
         };
         this.keyPressedInChatInput = this.keyPressedInChatInput.bind(this);
         this.state.p2pt.on('peerconnect', (peer: any) => {// eslint-disable-line
@@ -78,7 +79,7 @@ interface State {
 }
 
 interface Props {
-    roomName: string;
+    roomName: Room;
 }
 
 export default Codewords;
