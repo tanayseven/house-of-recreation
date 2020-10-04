@@ -1,23 +1,21 @@
-import React, { Component, useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { HashRouter, Route } from 'react-router-dom';
 import Home from './Home';
-import Codewords from './Codewords';
+import Codenames from './Codewords';
 import Pictionary from './Pictionary';
 import About from './About';
-import { UserContext, AnonymousUser, User } from './User';
-import { Lobby, Room } from './Room';
+import { AnonymousUser, User, UserContext } from './User';
 
 function App(): JSX.Element {
     const [userContext] = useState<User>(new AnonymousUser());
-    const [roomContext] = useState<Room>(new Lobby());
     return (
         <HashRouter>
             <UserContext.Provider value={userContext}>
                 <Route exact path="/">
                     <Home />
                 </Route>
-                <Route path="/codewords">
-                    <Codewords roomName={roomContext} />
+                <Route path="/codenames">
+                    <Codenames roomName={'sample-room'} />
                 </Route>
                 <Route path="/pictionary">
                     <Pictionary />
