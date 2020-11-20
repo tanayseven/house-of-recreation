@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { HashRouter, Route } from 'react-router-dom';
 import Home from './Home';
-import Codenames from './Codewords';
-import Pictionary from './Pictionary';
 import About from './About';
 import { AnonymousUser, User, UserContext } from './User';
+import { TicTacToeScreen } from './TicTacToe/Screen';
+import { AdvancedTicTacToeScreen } from './AdvancedTicTacToe/Screen';
 
 function App(): JSX.Element {
     const [userContext] = useState<User>(new AnonymousUser());
@@ -14,11 +14,11 @@ function App(): JSX.Element {
                 <Route exact path="/">
                     <Home />
                 </Route>
-                <Route path="/codenames">
-                    <Codenames roomName={'sample-room'} />
+                <Route path="/tic-tac-toe">
+                    <TicTacToeScreen roomName={'sample-room'} />
                 </Route>
-                <Route path="/pictionary">
-                    <Pictionary />
+                <Route path="/advanced-tic-tac-toe">
+                    <AdvancedTicTacToeScreen roomName={'sample-room'} />
                 </Route>
                 <Route path="/about">
                     <About />
