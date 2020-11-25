@@ -67,6 +67,7 @@ describe(`no player can play and already played cell in the grid`, () => {
         expect(successfulTurns).toEqual(false)
     })
 })
+
 describe(`players can play in empty cells in the grid`, () => {
     each([
         [
@@ -90,4 +91,14 @@ describe(`players can play in empty cells in the grid`, () => {
         })
         expect(successfulTurns).toEqual(true)
     })
+})
+
+// TODO add the cases for this test
+describe(`first player wins against second player`, () => {
+    each([[[]], [[]], [[]], [[]], [[]], [[]], [[]], [[]]])
+})
+
+// TODO add the cases for this test
+describe(`first player wins against second player`, () => {
+    each([[[]], [[]], [[]], [[]], [[]], [[]], [[]], [[]]])
 })
