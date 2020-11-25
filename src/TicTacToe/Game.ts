@@ -15,9 +15,15 @@ export class TicTacToe {
 
     currentPlayerIndex = 0;
 
-    play(row: number, column: number): boolean {
+    playerSigns: Array<XO> = ['X', 'O'];
+
+    canPlay(row: number, column: number): boolean {
+        return this.cells[row][column] == '-';
+    }
+
+    play(row: number, column: number): void {
         this.currentPlayerIndex = (this.currentPlayerIndex + 1) % this.players.length;
-        return false;
+        if (this.canPlay(row, column)) this.cells[row][column] = this.playerSigns[this.currentPlayerIndex];
     }
 
     get(row: number, column: number): XO {

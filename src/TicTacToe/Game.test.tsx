@@ -43,21 +43,51 @@ test(`when player1 and player2 plays, the turn should cycle back to player`, () 
 describe(`no player can play and already played cell in the grid`, () => {
     each([
         [
-            [0, 0],
-            [1, 1],
-            [0, 0],
+            [
+                [0, 0],
+                [1, 1],
+                [0, 0],
+            ],
         ],
         [
-            [0, 0],
-            [1, 1],
-            [0, 0],
+            [
+                [0, 0],
+                [1, 1],
+                [2, 0],
+                [0, 0],
+            ],
         ],
     ]).test(`when players play their turns in the sequence %d`, (turns: Array<Array<number>>) => {
         const game = new TicTacToe('Sophia', 'Olivia');
         let successfulTurns = true;
         turns.forEach((turn) => {
-            successfulTurns = game.play(turn[0], turn[1]);
+            successfulTurns = game.canPlay(turn[0], turn[1]);
+            game.play(turn[0], turn[1]);
         });
         expect(successfulTurns).toEqual(false);
+    });
+});
+describe(`players can play in empty cells in the grid`, () => {
+    each([
+        [
+            [
+                [0, 0],
+                [1, 1],
+            ],
+        ],
+        [
+            [
+                [0, 0],
+                [1, 1],
+                [2, 0],
+            ],
+        ],
+    ]).test(`when players play their turns in the sequence %d`, (turns: Array<Array<number>>) => {
+        const game = new TicTacToe('Sophia', 'Olivia');
+        let successfulTurns = true;
+        turns.forEach((turn) => {
+            successfulTurns = game.canPlay(turn[0], turn[1]);
+        });
+        expect(successfulTurns).toEqual(true);
     });
 });
