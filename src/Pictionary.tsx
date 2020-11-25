@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 function Pictionary(): JSX.Element {
     return (
@@ -8,7 +8,7 @@ function Pictionary(): JSX.Element {
                 <p>Pictionary (this is currently under construction)</p>
             </div>
         </div>
-    );
+    )
 }
 
-export default Pictionary;
+export default Pictionary

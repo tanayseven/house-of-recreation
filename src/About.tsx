@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 function About(): JSX.Element {
     return (
@@ -10,7 +10,7 @@ function About(): JSX.Element {
                 quis est doloremque labore iure!
             </p>
         </div>
-    );
+    )
 }
 
-export default About;
+export default About

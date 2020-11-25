@@ -1,13 +1,13 @@
-import React from 'react';
-import { useHistory, Link } from 'react-router-dom';
+import React from 'react'
+import { useHistory, Link } from 'react-router-dom'
 
 function Home(): JSX.Element {
-    const history = useHistory();
+    const history = useHistory()
 
     function roomSelect(event: React.ChangeEvent<HTMLSelectElement>): void {
-        const roomUrl = `/${event.target.value}`;
-        console.log('Changing room to ' + roomUrl);
-        history.push(roomUrl);
+        const roomUrl = `/${event.target.value}`
+        console.log('Changing room to ' + roomUrl)
+        history.push(roomUrl)
     }
 
     return (
@@ -27,7 +27,7 @@ function Home(): JSX.Element {
                 </p>
             </div>
         </div>
-    );
+    )
 }
 
-export default Home;
+export default Home
