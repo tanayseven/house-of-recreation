@@ -2,10 +2,6 @@ import React, { Component } from 'react'
 import Communication from '../Communication'
 
 export class AdvancedTicTacToeScreen extends Component<Props, State> {
-    constructor(props: Props) {
-        super(props)
-    }
-
     componentDidMount(): void {
         this.setState({ communication: new Communication(this.props.roomName, 'Lalu') })
     }
