@@ -32,14 +32,19 @@ jobs:
       - name: Install dependencies 
         run: npm install
       
-      - name: Run tests
+      - name: Test
         run: npm test
       
-      - name: Run build
+      - name: Build
         run: npm run build
       
-      - name: Netlify Actions
+      - name: Deploy
         uses: nwtgck/actions-netlify@v1.1.11
         with:
           # Publish directory
           publish-dir: build/
+          deploy-message: "Deploy from GitHub Actions"
+          production-branch: master
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
