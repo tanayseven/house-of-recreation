@@ -33,7 +33,12 @@ jobs:
         run: npm install
       
       - name: Test
-        run: npm test
+        run: |
+          npm test -- --coverage --watchAll=false
+          sed -i 's#/home/runner/work/house-of-recreation/house-of-recreation/#/github/workspace/#g' coverage/lcov.info # Fix the coverage report path
+
+      - name: Sonar Scanner
+        uses: SonarSource/sonarcloud-github-action@v1.3
       
       - name: Build
         run: npm run build
