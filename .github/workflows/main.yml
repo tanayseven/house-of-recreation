@@ -39,7 +39,9 @@ jobs:
 
       - name: Sonar Scanner
         uses: SonarSource/sonarcloud-github-action@v1.3
-      
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
       - name: Build
         run: npm run build
       
