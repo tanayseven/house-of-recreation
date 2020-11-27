@@ -17,15 +17,23 @@
 
 ### Tools, technologies and languages used
 
-- Typescript for type-safe coding
-- Testing with react-testing-library
-- Decentralized and distributed working with P2P communication using p2pt
-- React-Router to run the applicaiton as SPA
+- Based on the popular React library
+- Typescript as a popular type-safe language
+- Unit tests written with react-testing-library
+- Decentralized and distributed working with P2P communication using `bugout`
+- React-Router to run the application as SPA
 - Styling and theming using styled-components
+- Prettier and Eslint for linting
+- Husky for git pre-commit hooks
+- Sonar for static code quality analysis and quality gate
+- CI/CD in Github actions
+- Deployed on Netlify
 
 ### Commands
 ```bash
 npm start # starts the app in dev mode
 npm test # runs the tests in the background
 npm run build # creates a production build
+npm run lint # to check for linting errors
+npm run lint:fix # to fix the fixable linting errors
 ```
