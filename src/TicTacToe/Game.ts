@@ -1,5 +1,8 @@
+import { Game } from '../board/Game'
+
 type XO = '-' | 'X' | 'O'
-export class TicTacToe {
+
+export class TicTacToe implements Game {
     constructor(player1: string, player2: string) {
         this.players[0] = player1
         this.players[1] = player2

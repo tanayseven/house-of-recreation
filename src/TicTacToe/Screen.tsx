@@ -27,64 +27,19 @@ export class TicTacToeScreen extends Component<Props, State> {
             <div>
                 <h1>Tic Tac Toe</h1>
                 <div className="board-row">
-                    <Cell
-                        symbol={this.state.game.get(0, 0)}
-                        onClick={(): void => {
-                            this.play(0, 0)
-                        }}
-                    />
-                    <Cell
-                        symbol={this.state.game.get(0, 1)}
-                        onClick={(): void => {
-                            this.play(0, 1)
-                        }}
-                    />
-                    <Cell
-                        symbol={this.state.game.get(0, 2)}
-                        onClick={(): void => {
-                            this.play(0, 2)
-                        }}
-                    />
+                    <Cell row={0} column={0} game={this.state.game} />
+                    <Cell row={0} column={1} game={this.state.game} />
+                    <Cell row={0} column={2} game={this.state.game} />
                 </div>
                 <div className="board-row">
-                    <Cell
-                        symbol={this.state.game.get(1, 0)}
-                        onClick={(): void => {
-                            this.play(1, 0)
-                        }}
-                    />
-                    <Cell
-                        symbol={this.state.game.get(1, 1)}
-                        onClick={(): void => {
-                            this.play(1, 1)
-                        }}
-                    />
-                    <Cell
-                        symbol={this.state.game.get(1, 2)}
-                        onClick={(): void => {
-                            this.play(1, 2)
-                        }}
-                    />
+                    <Cell row={1} column={0} game={this.state.game} />
+                    <Cell row={1} column={1} game={this.state.game} />
+                    <Cell row={1} column={2} game={this.state.game} />
                 </div>
                 <div className="board-row">
-                    <Cell
-                        symbol={this.state.game.get(2, 0)}
-                        onClick={(): void => {
-                            this.play(2, 0)
-                        }}
-                    />
-                    <Cell
-                        symbol={this.state.game.get(2, 1)}
-                        onClick={(): void => {
-                            this.play(2, 1)
-                        }}
-                    />
-                    <Cell
-                        symbol={this.state.game.get(2, 2)}
-                        onClick={(): void => {
-                            this.play(2, 2)
-                        }}
-                    />
+                    <Cell row={2} column={0} game={this.state.game} />
+                    <Cell row={2} column={1} game={this.state.game} />
+                    <Cell row={2} column={2} game={this.state.game} />
                 </div>
             </div>
         )
