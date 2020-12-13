@@ -17,11 +17,6 @@ export class TicTacToeScreen extends Component<Props, State> {
         })
     }
 
-    play(row: number, column: number): void {
-        this.state.game.play(row, column)
-        this.setState({ game: this.state.game })
-    }
-
     render(): JSX.Element {
         return (
             <div>
