@@ -18,7 +18,7 @@ export class TicTacToe {
     playerSigns: Array<XO> = ['X', 'O']
 
     canPlay(row: number, column: number): boolean {
-        return this.cells[row][column] == '-'
+        return this.cells[row][column] === '-'
     }
 
     play(row: number, column: number): void {
@@ -34,7 +34,7 @@ export class TicTacToe {
         let sum = 0
         this.cells.forEach((row) =>
             row.forEach((cell) => {
-                if (cell == '-') {
+                if (cell === '-') {
                     sum++
                 }
             }),
