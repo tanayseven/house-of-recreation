@@ -41,10 +41,4 @@ function App(): JSX.Element {
         </HashRouter>
     )
 }
-
-interface State {
-    userName: string
-    roomName: string
-}
-
-export { App }
+export default App

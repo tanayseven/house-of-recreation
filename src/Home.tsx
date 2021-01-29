@@ -14,9 +14,6 @@ const LoginContainer = styled.div`
     width: 80%;
     max-width: 500px;
 `
-
-const TextInput = styled.fieldset``
-
 function Home(): JSX.Element {
     const history = useHistory()
 
