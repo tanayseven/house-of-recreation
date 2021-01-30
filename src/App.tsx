@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import { HashRouter, Route } from 'react-router-dom'
 import Home from './Home'
 import About from './About'
-import { AnonymousUser, User, UserContext } from './User'
 import { TicTacToeScreen } from './TicTacToe/Screen'
 import { AdvancedTicTacToeScreen } from './AdvancedTicTacToe/Screen'
 import { createGlobalStyle } from 'styled-components'
+import { AnonymousUser, User, UserContext } from './User'
 
 const GlobalStyle = createGlobalStyle`
     body, html {

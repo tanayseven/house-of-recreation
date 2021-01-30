@@ -1,30 +1,14 @@
 import { createContext } from 'react'
 
-export interface User {
-    isLoggedIn(): boolean
-    getUserName(): string
-}
-
-export class AnonymousUser implements User {
-    isLoggedIn(): boolean {
-        return false
-    }
-    getUserName(): string {
-        return 'anonymous-user'
+class LoggedInUser {
+    readonly username: string
+    constructor(username: string) {
+        this.username = username
     }
 }
+class AnonymousUser {}
+type User = LoggedInUser | AnonymousUser
 
-export class LoggedInUser implements User {
-    userName: string
-    constructor(userName: string) {
-        this.userName = userName
-    }
-    isLoggedIn(): boolean {
-        return true
-    }
-    getUserName(): string {
-        return this.userName
-    }
-}
-
+export { AnonymousUser, LoggedInUser }
+export type { User }
 export const UserContext = createContext<User>(new AnonymousUser())
