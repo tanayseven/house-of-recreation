@@ -34,3 +34,34 @@ export const Select = styled.select`
 export const Button = styled.button`
     ${CommonInput}
 `
+
+export const GameBoardHeader = styled.div`
+    text-align: center;
+`
+
+export const GameBoardMain = styled.div`
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+    background-color: #34495e;
+    color: #fff;
+    border: 6px solid #2c3e50;
+    border-radius: 10px;
+
+    display: grid;
+    grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+`
+
+export const GameBoardContainer = styled.div`
+    flex-direction: column;
+`
+
+export const GameTile = styled.button`
+    border: 6px solid #2c3e50;
+    border-radius: 2px;
+    font-weight: bold;
+    font-size: 4em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`

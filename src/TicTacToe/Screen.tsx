@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Communication from '../Communication'
 import { Cell } from '../board/Cell'
 import { TicTacToe } from './Game'
+import { GameBoardMain, GameBoardHeader, MainContainer, GameBoardContainer } from '../CustomStyled'
 
 export class TicTacToeScreen extends Component<Props, State> {
     constructor(props: Props) {
@@ -19,24 +20,24 @@ export class TicTacToeScreen extends Component<Props, State> {
 
     render(): JSX.Element {
         return (
-            <div>
-                <h1>Tic Tac Toe</h1>
-                <div className="board-row">
-                    <Cell row={0} column={0} game={this.state.game} />
-                    <Cell row={0} column={1} game={this.state.game} />
-                    <Cell row={0} column={2} game={this.state.game} />
-                </div>
-                <div className="board-row">
-                    <Cell row={1} column={0} game={this.state.game} />
-                    <Cell row={1} column={1} game={this.state.game} />
-                    <Cell row={1} column={2} game={this.state.game} />
-                </div>
-                <div className="board-row">
-                    <Cell row={2} column={0} game={this.state.game} />
-                    <Cell row={2} column={1} game={this.state.game} />
-                    <Cell row={2} column={2} game={this.state.game} />
-                </div>
-            </div>
+            <MainContainer>
+                <GameBoardContainer>
+                    <GameBoardHeader>
+                        <h1>Tic Tac Toe</h1>
+                    </GameBoardHeader>
+                    <GameBoardMain>
+                        <Cell row={0} column={0} game={this.state.game} />
+                        <Cell row={0} column={1} game={this.state.game} />
+                        <Cell row={0} column={2} game={this.state.game} />
+                        <Cell row={1} column={0} game={this.state.game} />
+                        <Cell row={1} column={1} game={this.state.game} />
+                        <Cell row={1} column={2} game={this.state.game} />
+                        <Cell row={2} column={0} game={this.state.game} />
+                        <Cell row={2} column={1} game={this.state.game} />
+                        <Cell row={2} column={2} game={this.state.game} />
+                    </GameBoardMain>
+                </GameBoardContainer>
+            </MainContainer>
         )
     }
 }

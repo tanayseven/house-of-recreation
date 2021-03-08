@@ -1,6 +1,6 @@
 import { Game } from '../board/Game'
 
-type XO = '-' | 'X' | 'O'
+type XO = ' ' | 'X' | 'O'
 
 export class TicTacToe implements Game {
     constructor(player1: string, player2: string) {
@@ -9,9 +9,9 @@ export class TicTacToe implements Game {
     }
 
     cells: Array<Array<XO>> = [
-        ['-', '-', '-'],
-        ['-', '-', '-'],
-        ['-', '-', '-'],
+        [' ', ' ', ' '],
+        [' ', ' ', ' '],
+        [' ', ' ', ' '],
     ]
 
     players = ['', '']
@@ -21,7 +21,7 @@ export class TicTacToe implements Game {
     playerSigns: Array<XO> = ['X', 'O']
 
     canPlay(row: number, column: number): boolean {
-        return this.cells[row][column] === '-'
+        return this.cells[row][column] === ' '
     }
 
     play(row: number, column: number): void {
@@ -37,7 +37,7 @@ export class TicTacToe implements Game {
         let sum = 0
         this.cells.forEach((row) =>
             row.forEach((cell) => {
-                if (cell === '-') {
+                if (cell === ' ') {
                     sum++
                 }
             }),

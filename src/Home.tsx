@@ -17,8 +17,8 @@ function Home(): JSX.Element {
                 <form id="contact" action="" method="post">
                     <h3>playindoor.games</h3>
                     <h4>Create a game below</h4>
-                    <Input placeholder="User name" type="text" tabIndex={1} required />
-                    <Input placeholder="Room name" type="text" tabIndex={2} required autoFocus />
+                    <Input placeholder="User name" type="text" tabIndex={1} required autoFocus />
+                    <Input placeholder="Room name" type="text" tabIndex={2} required />
                     <Select onChange={roomSelect}>
                         <option>Select a game</option>
                         <option value="tic-tac-toe">Tic Tic Toe</option>
