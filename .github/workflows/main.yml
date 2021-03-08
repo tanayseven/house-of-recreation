@@ -48,7 +48,7 @@ jobs:
       
       - name: Deploy
         run: |
-          sudo npm install netlify-cli -g
+          sudo npm install netlify-cli --unsafe-perm=true -g
           netlify deploy --dir=./build/ --message "Deploy from Github Actions"
           netlify deploy --prod --dir=./build/ --message "Prod deployment from github"
         env:
