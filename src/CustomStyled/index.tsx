@@ -23,11 +23,11 @@ export const CommonInput = css`
     box-sizing: border-box;
 `
 
-export const TextInput = styled.input`
+export const Input = styled.input`
     ${CommonInput}
 `
 
-export const SelectInput = styled.select`
+export const Select = styled.select`
     ${CommonInput}
 `
 
