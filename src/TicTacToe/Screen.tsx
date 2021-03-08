@@ -24,6 +24,7 @@ export class TicTacToeScreen extends Component<Props, State> {
                 <GameBoardContainer>
                     <GameBoardHeader>
                         <h1>Tic Tac Toe</h1>
+                        <h2>It&apos;s {this.state.game.currentPlayer()}&apos;s turn</h2>
                     </GameBoardHeader>
                     <GameBoardMain>
                         <Cell row={0} column={0} game={this.state.game} />

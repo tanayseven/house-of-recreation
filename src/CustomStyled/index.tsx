@@ -43,9 +43,9 @@ export const GameBoardMain = styled.div`
     width: 300px;
     height: 300px;
     margin: 0 auto;
-    background-color: #34495e;
-    color: #fff;
-    border: 6px solid #2c3e50;
+    background-color: white;
+    color: black;
+    border: 2px solid black;
     border-radius: 10px;
 
     display: grid;
@@ -57,11 +57,12 @@ export const GameBoardContainer = styled.div`
 `
 
 export const GameTile = styled.button`
-    border: 6px solid #2c3e50;
+    border: 2px solid black;
     border-radius: 2px;
     font-weight: bold;
     font-size: 4em;
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 `
