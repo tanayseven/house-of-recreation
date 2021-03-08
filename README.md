@@ -23,9 +23,9 @@
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=tanayseven_house-of-recreation&metric=security_rating)](https://sonarcloud.io/dashboard?id=tanayseven_house-of-recreation)
 
 
-# Home of Recreation
+# playindoor.games
 
-## A place to enjoy with friends when you are bored or alone
+## A place to enjoy with friends, when you are located thousands of kilometers apart
 
 ### Tools, technologies and languages used
 
