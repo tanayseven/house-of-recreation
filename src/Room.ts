@@ -1,3 +1,6 @@
+// Copyright (C) 2021  Tanay PrabhuDesai
+// Please refer to LICENSE.txt file for a complete copyright notice
+
 import { createContext } from 'react'
 import { User } from './User'
 

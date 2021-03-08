@@ -1,3 +1,6 @@
+// Copyright (C) 2021  Tanay PrabhuDesai
+// Please refer to LICENSE.txt file for a complete copyright notice
+
 import { Game } from '../board/Game'
 
 type XO = ' ' | 'X' | 'O'

@@ -1,3 +1,6 @@
+// Copyright (C) 2021  Tanay PrabhuDesai
+// Please refer to LICENSE.txt file for a complete copyright notice
+
 import React, { useState } from 'react'
 import { Game } from './Game'
 import { GameTile } from '../CustomStyled'

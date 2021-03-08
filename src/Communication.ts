@@ -1,3 +1,6 @@
+// Copyright (C) 2021  Tanay PrabhuDesai
+// Please refer to LICENSE.txt file for a complete copyright notice
+
 const Bugout = require('bugout') // eslint-disable-line
 
 const BASE_IDENTIFIER = 'com.house-of-rec.rooms.'

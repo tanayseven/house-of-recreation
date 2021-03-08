@@ -22,6 +22,8 @@
 
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=tanayseven_playindoor.games&metric=security_rating)](https://sonarcloud.io/dashboard?id=tanayseven_playindoor.games)
 
+![GitHub](https://img.shields.io/github/license/tanayseven/playindoor.games?style=plastic)
+
 
 # playindoor.games
 

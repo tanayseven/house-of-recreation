@@ -1,3 +1,6 @@
+// Copyright (C) 2021  Tanay PrabhuDesai
+// Please refer to LICENSE.txt file for a complete copyright notice
+
 import React, { Component } from 'react'
 import Communication from '../Communication'
 import { Cell } from '../board/Cell'
