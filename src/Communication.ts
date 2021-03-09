@@ -3,7 +3,7 @@
 
 const Bugout = require('bugout') // eslint-disable-line
 
-const BASE_IDENTIFIER = 'com.house-of-rec.rooms.'
+const BASE_IDENTIFIER = 'games.playindoor.room.'
 
 export default class Communication {
     bugout: any //eslint-disable-line

@@ -51,3 +51,28 @@ npm run build # creates a production build
 npm run lint # to check for linting errors
 npm run lint:fix # to fix the fixable linting errors
 ```
+
+### Explanation about the project
+
+Do you want to contribute a new game to playindoor.games? Do you find it hard to navigate through the code?
+To know how this project works please have a look at [this document](docs/README.md) 
+
+### License
+
+```
+    playindoor.games a multiplayer online gaming platform
+    Copyright (C) 2021  Tanay PrabhuDesai
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+```
