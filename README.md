@@ -1,4 +1,4 @@
-### Continuous Integration and deployment
+### Continuous Integration and Deployment
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/767f5835-23d6-49bb-b9ea-128c3bafde3f/deploy-status)](https://app.netlify.com/sites/playindoor.games/deploys)
 

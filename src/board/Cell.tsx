@@ -21,7 +21,7 @@ export const Cell: React.FC<Props> = (props: Props) => {
     )
 }
 
-interface Props {
+type Props = {
     game: Game
     row: number
     column: number

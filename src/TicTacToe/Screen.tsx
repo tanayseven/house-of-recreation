@@ -1,56 +1,50 @@
 // Copyright (C) 2021  Tanay PrabhuDesai
 // Please refer to LICENSE.txt file for a complete copyright notice
 
-import React, { Component } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Communication from '../Communication'
 import { Cell } from '../board/Cell'
 import { TicTacToe } from './Game'
-import { GameBoardMain, GameBoardHeader, MainContainer, GameBoardContainer } from '../CustomStyled'
+import { useParams } from 'react-router-dom'
+import { GameBoardContainer, GameBoardHeader, GameBoardMain, MainContainer } from '../CustomStyled'
+import { User, UserContext } from '../User'
 
-export class TicTacToeScreen extends Component<Props, State> {
-    constructor(props: Props) {
-        super(props)
-        this.state = {
-            game: new TicTacToe('Lalu', 'Kaku'),
-        } as State
-    }
-
-    componentDidMount(): void {
-        this.setState({
-            communication: new Communication(this.props.roomName, 'Lalu'),
-        })
-    }
-
-    render(): JSX.Element {
-        return (
-            <MainContainer>
-                <GameBoardContainer>
-                    <GameBoardHeader>
-                        <h1>Tic Tac Toe</h1>
-                        <h2>It&apos;s {this.state.game.currentPlayer()}&apos;s turn</h2>
-                    </GameBoardHeader>
-                    <GameBoardMain>
-                        <Cell row={0} column={0} game={this.state.game} />
-                        <Cell row={0} column={1} game={this.state.game} />
-                        <Cell row={0} column={2} game={this.state.game} />
-                        <Cell row={1} column={0} game={this.state.game} />
-                        <Cell row={1} column={1} game={this.state.game} />
-                        <Cell row={1} column={2} game={this.state.game} />
-                        <Cell row={2} column={0} game={this.state.game} />
-                        <Cell row={2} column={1} game={this.state.game} />
-                        <Cell row={2} column={2} game={this.state.game} />
-                    </GameBoardMain>
-                </GameBoardContainer>
-            </MainContainer>
-        )
-    }
+type Params = {
+    room: string
 }
 
-interface State {
-    communication: Communication
-    game: TicTacToe
-}
+export const TicTacToeScreen = (): JSX.Element => {
+    const [game, setGame] = useState<TicTacToe>()
+    const { room } = useParams<Params>()
+    const user = useContext<User>(UserContext)
+    console.log(`-------------------> ${user.username}`)
+    const [communication, setCommunication] = useState<Communication>(new Communication(room, user.username))
 
-interface Props {
-    roomName: string
+    useEffect(() => {
+        console.log('some action happened')
+    }, [communication])
+
+    if (typeof game === 'undefined') return <p>Loading...</p>
+
+    return (
+        <MainContainer>
+            <GameBoardContainer>
+                <GameBoardHeader>
+                    <h1>Tic Tac Toe</h1>
+                    <h2>It&apos;s {game.currentPlayer()}&apos;s turn</h2>
+                </GameBoardHeader>
+                <GameBoardMain>
+                    <Cell row={0} column={0} game={game} />
+                    <Cell row={0} column={1} game={game} />
+                    <Cell row={0} column={2} game={game} />
+                    <Cell row={1} column={0} game={game} />
+                    <Cell row={1} column={1} game={game} />
+                    <Cell row={1} column={2} game={game} />
+                    <Cell row={2} column={0} game={game} />
+                    <Cell row={2} column={1} game={game} />
+                    <Cell row={2} column={2} game={game} />
+                </GameBoardMain>
+            </GameBoardContainer>
+        </MainContainer>
+    )
 }

@@ -3,15 +3,26 @@
 
 import { createContext } from 'react'
 
-class LoggedInUser {
-    readonly username: string
-    constructor(username: string) {
+type LoginState = 'anonymous' | 'authenticated'
+
+export class User {
+    username: string
+    state: LoginState
+    constructor(state: LoginState) {
+        this.state = state
+        this.username = '' // TODO replace this with an option monad
+    }
+    isLoggedIn = (): boolean => {
+        return this.state === 'authenticated'
+    }
+    login = (username: string): void => {
         this.username = username
+        this.state = 'authenticated'
+    }
+    logout = (): void => {
+        this.username = '' // TODO replace this with an option monad
+        this.state = 'anonymous'
     }
 }
-class AnonymousUser {}
-type User = LoggedInUser | AnonymousUser
 
-export { AnonymousUser, LoggedInUser }
-export type { User }
-export const UserContext = createContext<User>(new AnonymousUser())
+export const UserContext = createContext(new User('anonymous'))
