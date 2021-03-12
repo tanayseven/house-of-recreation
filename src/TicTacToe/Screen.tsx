@@ -10,15 +10,15 @@ import { GameBoardContainer, GameBoardHeader, GameBoardMain, MainContainer } fro
 import { User, UserContext } from '../User'
 
 type Params = {
-    room: string
+    roomId: string
 }
 
 export const TicTacToeScreen = (): JSX.Element => {
     const [game, setGame] = useState<TicTacToe>()
-    const { room } = useParams<Params>()
+    const { roomId } = useParams<Params>()
     const user = useContext<User>(UserContext)
     console.log(`-------------------> ${user.username}`)
-    const [communication, setCommunication] = useState<Communication>(new Communication(room, user.username))
+    const [communication, setCommunication] = useState<Communication>(new Communication(roomId, user.username))
 
     useEffect(() => {
         console.log('some action happened')
