@@ -14,11 +14,10 @@ type Params = {
 }
 
 export const TicTacToeScreen = (): JSX.Element => {
-    const [game, setGame] = useState<TicTacToe>()
+    const [game, setGame] = useState<TicTacToe>() //eslint-disable-line
     const { roomId } = useParams<Params>()
     const user = useContext<User>(UserContext)
-    console.log(`-------------------> ${user.username}`)
-    const [communication, setCommunication] = useState<Communication>(new Communication(roomId, user.username))
+    const [communication, setCommunication] = useState<Communication>(new Communication(roomId, user.username)) //eslint-disable-line
 
     useEffect(() => {
         console.log('some action happened')
