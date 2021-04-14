@@ -2,7 +2,7 @@
 // Please refer to LICENSE.txt file for a complete copyright notice
 
 import React, { useContext, useEffect, useState } from 'react'
-import Communication from '../Communication'
+import CommunicationClient from '../CommunicationClient'
 import { Cell } from '../board/Cell'
 import { TicTacToe } from './Game'
 import { useParams } from 'react-router-dom'
@@ -17,11 +17,15 @@ export const TicTacToeScreen = (): JSX.Element => {
     const [game, setGame] = useState<TicTacToe>() //eslint-disable-line
     const { roomId } = useParams<Params>()
     const user = useContext<User>(UserContext)
-    const [communication, setCommunication] = useState<Communication>(new Communication(roomId, user.username)) //eslint-disable-line
+    const [communication, setCommunication] = useState<CommunicationClient>() //eslint-disable-line
 
     useEffect(() => {
-        console.log('some action happened')
-    }, [communication])
+        setCommunication(
+            new CommunicationClient(roomId, user.username, 2, (userName, status) => {
+                console.log(`${userName} just went ${status}`)
+            }),
+        )
+    }, [])
 
     if (typeof game === 'undefined') return <p>Loading...</p>
 

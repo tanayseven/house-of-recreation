@@ -2,11 +2,15 @@
 // Please refer to LICENSE.txt file for a complete copyright notice
 
 import React, { Component } from 'react'
-import Communication from '../Communication'
+import CommunicationClient from '../CommunicationClient'
 
 export class AdvancedTicTacToeScreen extends Component<Props, State> {
     componentDidMount(): void {
-        this.setState({ communication: new Communication(this.props.roomName, 'Lalu') })
+        this.setState({
+            communication: new CommunicationClient(this.props.roomName, 'Lalu', 2, (userName, status) => {
+                console.log(`${userName} just went ${status}`)
+            }),
+        })
     }
 
     render(): JSX.Element {
@@ -19,7 +23,7 @@ export class AdvancedTicTacToeScreen extends Component<Props, State> {
 }
 
 interface State {
-    communication: Communication
+    communication: CommunicationClient
 }
 
 interface Props {
