@@ -2,12 +2,12 @@
 // Please refer to LICENSE.txt file for a complete copyright notice
 
 import React, { useContext, useEffect, useState } from 'react'
-import CommunicationClient, { CreateRoom, JoinRoom } from '../CommunicationClient'
 import { Cell } from '../board/Cell'
 import { TicTacToe } from './Game'
 import { useParams } from 'react-router-dom'
 import { GameBoardContainer, GameBoardHeader, GameBoardMain, MainContainer } from '../CustomStyled'
 import { User, UserContext } from '../User'
+import CommunicationClient from '../communication/CommunicationClient'
 
 type Params = {
     roomId: string

@@ -7,7 +7,6 @@ import About from './About'
 import { TicTacToeView } from './TicTacToe/Screen'
 import { createGlobalStyle } from 'styled-components'
 import Home from './login/Home'
-import { LoginContainer } from './CustomStyled'
 import CreateGameView from './login/CreateGameView'
 import JoinGameView from './login/JoinGameView'
 

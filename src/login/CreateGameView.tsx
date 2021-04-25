@@ -6,18 +6,18 @@
 
 import React, { useState } from 'react'
 import * as O from 'fp-ts/Option'
-import CommunicationClient, { ConnectionStatus, CreateRoom } from '../CommunicationClient'
+import CommunicationClient, { ConnectionStatus, CreateRoom } from '../communication/CommunicationClient'
 import { pipe } from 'fp-ts/function'
 import { Button, Input, LoginContainer, MainContainer, Select } from '../CustomStyled'
 import { LoginFooter, LoginHeader } from './Components'
+import Loader from '../Loader'
 
 const CreateGameView = (): JSX.Element => {
     const [userName, setUserName] = useState('')
-    const [roomId, setRoomId] = useState('')
     const [gameId, setGameId] = useState('')
     const [communicationClient, setCommunicationClient] = useState<O.Option<CommunicationClient>>(O.none)
     const [connectionStatus, setConnectionStatus] = useState<ConnectionStatus>('offline')
-    const redirectToRoom = (): void => {
+    const redirectTo = (roomId: string): void => {
         const roomUrl = `/${gameId}/${roomId}`
         console.log('Changing room to ' + roomUrl)
         // history.push(roomUrl)
@@ -42,16 +42,21 @@ const CreateGameView = (): JSX.Element => {
     const connClientStateHandler = (newConnClientStateHandler: ConnectionStatus): void => {
         setConnectionStatus(newConnClientStateHandler)
     }
+    const roomId = pipe(
+        communicationClient,
+        O.map((obj) => obj.roomId),
+        O.getOrElse(() => ''),
+    )
     return (
         <>
             <MainContainer>
                 <LoginContainer>
+                    <Loader />
                     <LoginHeader />
                     <Input
                         placeholder="User name"
                         type="text"
                         tabIndex={1}
-                        // eslint-disable-next-line @typescript-eslint/no-empty-function
                         onChange={(event): void => {
                             setUserName(event.target.value)
                         }}

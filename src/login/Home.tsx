@@ -5,7 +5,7 @@
  */
 
 import React from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { Button, LoginContainer, MainContainer } from '../CustomStyled'
 import { LoginFooter, LoginHeader } from './Components'
 

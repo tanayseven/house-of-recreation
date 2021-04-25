@@ -13,6 +13,7 @@ export const LoginFooter = (): JSX.Element => (
         Created by{' '}
         <a href="https://tanayseven.com" target="_blank" rel="noreferrer">
             Tanay PrabhuDesai
-        </a>
+        </a>{' '}
+        &copy; 2021
     </p>
 )

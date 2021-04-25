@@ -1,10 +1,12 @@
-// Copyright (C) 2021  Tanay PrabhuDesai
-// Please refer to LICENSE.txt file for a complete copyright notice
+/*
+ * Copyright (c) 2021. Tanay PrabhuDesai
+ * Please refer to LICENSE.txt file for a complete copyright notice
+ *
+ */
 
 import Bugout, { BugoutOpts, SeenCallback } from 'bugout'
 import { v4 as uuid4 } from 'uuid'
 import * as O from 'fp-ts/Option'
-import { setInterval } from 'timers'
 
 export type Message = {  //eslint-disable-line
     fromUser: string

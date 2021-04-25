@@ -5,7 +5,7 @@
  */
 
 import React, { useState } from 'react'
-import CommunicationClient, { ConnectionStatus, JoinRoom } from '../CommunicationClient'
+import CommunicationClient, { ConnectionStatus, JoinRoom } from '../communication/CommunicationClient'
 import * as O from 'fp-ts/Option'
 import { pipe } from 'fp-ts/function'
 import { Button, Input, LoginContainer, MainContainer } from '../CustomStyled'
