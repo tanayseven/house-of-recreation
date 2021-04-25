@@ -17,7 +17,7 @@ export const TicTacToeView = (): JSX.Element => {
     const [game, setGame] = useState<TicTacToe>()
     const { roomId } = useParams<Params>() //eslint-disable-line
     const user = useContext<User>(UserContext)
-    const [commClient, setCommClient] = useState<CommunicationClient>()
+    const [commClient, setCommClient] = useState<CommunicationClient>() //eslint-disable-line
 
     useEffect(() => {
         if (typeof commClient != 'undefined' && commClient.totalPeers() === 2) {

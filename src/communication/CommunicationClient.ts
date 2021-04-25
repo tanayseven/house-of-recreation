@@ -30,7 +30,7 @@ export type CreateRoom = {
     connectionStatusHandler: (peerName: string, status: ConnectionStatus) => void
 }
 
-const isCreateRoom = (obj: any): obj is CreateRoom => {
+const isCreateRoom = (obj: any): obj is CreateRoom => { //eslint-disable-line
     return 'game' in obj
 }
 

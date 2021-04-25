@@ -17,7 +17,7 @@ const CreateGameView = (): JSX.Element => {
     const [gameId, setGameId] = useState('')
     const [communicationClient, setCommunicationClient] = useState<O.Option<CommunicationClient>>(O.none)
     const [connectionStatus, setConnectionStatus] = useState<ConnectionStatus>('offline')
-    const redirectTo = (roomId: string): void => {
+    const redirectTo = (roomId: string): void => { //eslint-disable-line
         const roomUrl = `/${gameId}/${roomId}`
         console.log('Changing room to ' + roomUrl)
         // history.push(roomUrl)
@@ -42,7 +42,7 @@ const CreateGameView = (): JSX.Element => {
     const connClientStateHandler = (newConnClientStateHandler: ConnectionStatus): void => {
         setConnectionStatus(newConnClientStateHandler)
     }
-    const roomId = pipe(
+    const roomId = pipe( //eslint-disable-line
         communicationClient,
         O.map((obj) => obj.roomId),
         O.getOrElse(() => ''),
@@ -51,7 +51,13 @@ const CreateGameView = (): JSX.Element => {
         <>
             <MainContainer>
                 <LoginContainer>
-                    <Loader />
+                    {connectionStatus === 'offline' && roomId !== '' ? (
+                        <Loader>
+                            <p>Room ID: {roomId}</p>
+                        </Loader>
+                    ) : (
+                        <></>
+                    )}
                     <LoginHeader />
                     <Input
                         placeholder="User name"

@@ -13,14 +13,14 @@ import { LoginFooter, LoginHeader } from './Components'
 
 const JoinGameView = (): JSX.Element => {
     const [roomId, setRoomId] = useState('')
-    const [gameId, setGameId] = useState('')
+    const [gameId, setGameId] = useState('') //eslint-disable-line
     const [userName, setUserName] = useState('')
-    const [connectionStatus, setConnectionStatus] = useState<ConnectionStatus>('offline')
+    const [connectionStatus, setConnectionStatus] = useState<ConnectionStatus>('offline') //eslint-disable-line
     const [communicationClient, setCommunicationClient] = useState<O.Option<CommunicationClient>>(O.none)
     const connClientStateHandler = (newConnClientStateHandler: ConnectionStatus): void => {
         setConnectionStatus(newConnClientStateHandler)
     }
-    const redirectToRoom = (): void => {
+    const redirectToRoom = (): void => { //eslint-disable-line
         const roomUrl = `/${gameId}/${roomId}`
         console.log('Changing room to ' + roomUrl)
         // history.push(roomUrl)
@@ -50,7 +50,6 @@ const JoinGameView = (): JSX.Element => {
                         placeholder="User name"
                         type="text"
                         tabIndex={1}
-                        // eslint-disable-next-line @typescript-eslint/no-empty-function
                         onChange={(event): void => {
                             setUserName(event.target.value)
                         }}
