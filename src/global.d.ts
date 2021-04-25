@@ -7,7 +7,7 @@ type BugoutOpts = {
     announce?: string[]
 }
 
-type SeenCallBack = (address: string) => void
+type SeenCallback = (address: string) => void
 type ServerCallback = (address: string) => void
 type ConnectionsCallback = (count: number) => void
 type MessageCallback = (address: string, message: Record<string, unknown>, packet: Record<string, unknown>) => void
@@ -15,10 +15,10 @@ type PingCallback = (address: string) => void
 type LeftCallback = (address: string) => void
 type TimeoutCallback = (address: string) => void
 type RPCCallback = (address: string, callback: (...any) => void) => void
-type RPCResponseCallBack = (address: string, none: string, response: Record<string, unknown>) => void
+type RPCResponseCallback = (address: string, none: string, response: Record<string, unknown>) => void
 
 type EventCallbacks =
-    | SeenCallBack
+    | SeenCallback
     | ServerCallback
     | ConnectionsCallback
     | MessageCallback
@@ -26,13 +26,13 @@ type EventCallbacks =
     | LeftCallback
     | TimeoutCallback
     | RPCCallback
-    | RPCResponseCallBack
+    | RPCResponseCallback
 
 class Bugout {
     constructor(identifier: string, opts?: BugoutOpts)
     address(): string
-    register(callName: string, func: CustomFunction, docString: string): void
-    rpc(address: string, callName: string, args: CustomFunctionArgs, callback: Function) //eslint-disable-line
+    register(callName: string, func: Function, docString?: string): void //eslint-disable-line
+    rpc(address: string, callName: string, args: Array<any>, callback: Function) //eslint-disable-line
     send(address: string, message: string): void
     send(message: string): void
     heartbeat(milliseconds: number): void
@@ -45,7 +45,7 @@ declare module 'bugout' {
     export {
         Bugout,
         BugoutOpts,
-        SeenCallBack,
+        SeenCallback,
         ServerCallback,
         ConnectionsCallback,
         MessageCallback,
@@ -53,6 +53,6 @@ declare module 'bugout' {
         LeftCallback,
         TimeoutCallback,
         RPCCallback,
-        RPCResponseCallBack,
+        RPCResponseCallback,
     }
 }

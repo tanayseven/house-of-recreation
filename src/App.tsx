@@ -3,11 +3,13 @@
 
 import React from 'react'
 import { HashRouter, Route } from 'react-router-dom'
-import Home from './Home'
 import About from './About'
-import { TicTacToeScreen } from './TicTacToe/Screen'
-import { AdvancedTicTacToeScreen } from './AdvancedTicTacToe/Screen'
+import { TicTacToeView } from './TicTacToe/Screen'
 import { createGlobalStyle } from 'styled-components'
+import Home from './login/Home'
+import { LoginContainer } from './CustomStyled'
+import CreateGameView from './login/CreateGameView'
+import JoinGameView from './login/JoinGameView'
 
 const GlobalStyle = createGlobalStyle`
     body, html {
@@ -29,10 +31,13 @@ const App = (): JSX.Element => {
                 <Home />
             </Route>
             <Route path="/tic-tac-toe/:roomId">
-                <TicTacToeScreen />
+                <TicTacToeView />
             </Route>
-            <Route path="/advanced-tic-tac-toe/:roomId">
-                <AdvancedTicTacToeScreen roomName={'sample-room'} />
+            <Route path="/create-game">
+                <CreateGameView />
+            </Route>
+            <Route path="/join-game">
+                <JoinGameView />
             </Route>
             <Route path="/about">
                 <About />

@@ -2,7 +2,7 @@
 // Please refer to LICENSE.txt file for a complete copyright notice
 
 import React, { useContext, useEffect, useState } from 'react'
-import CommunicationClient from '../CommunicationClient'
+import CommunicationClient, { CreateRoom, JoinRoom } from '../CommunicationClient'
 import { Cell } from '../board/Cell'
 import { TicTacToe } from './Game'
 import { useParams } from 'react-router-dom'
@@ -13,21 +13,36 @@ type Params = {
     roomId: string
 }
 
-export const TicTacToeScreen = (): JSX.Element => {
-    const [game, setGame] = useState<TicTacToe>() //eslint-disable-line
-    const { roomId } = useParams<Params>()
+export const TicTacToeView = (): JSX.Element => {
+    const [game, setGame] = useState<TicTacToe>()
+    const { roomId } = useParams<Params>() //eslint-disable-line
     const user = useContext<User>(UserContext)
-    const [communication, setCommunication] = useState<CommunicationClient>() //eslint-disable-line
+    const [commClient, setCommClient] = useState<CommunicationClient>()
 
     useEffect(() => {
-        setCommunication(
-            new CommunicationClient(roomId, user.username, 2, (userName, status) => {
-                console.log(`${userName} just went ${status}`)
-            }),
-        )
-    }, [])
+        if (typeof commClient != 'undefined' && commClient.totalPeers() === 2) {
+            setGame(new TicTacToe(user.username, 'someoeneElse'))
+        }
+    }, [commClient])
 
-    if (typeof game === 'undefined') return <p>Loading...</p>
+    if (typeof game === 'undefined' && typeof commClient !== 'undefined')
+        return (
+            <>
+                <MainContainer>
+                    <p>Room link: {commClient.roomId}</p>
+                    <br />
+                    <p>Loading...</p>
+                </MainContainer>
+            </>
+        )
+    if (typeof game === 'undefined')
+        return (
+            <>
+                <MainContainer>
+                    <p>Loading...</p>
+                </MainContainer>
+            </>
+        )
 
     return (
         <MainContainer>

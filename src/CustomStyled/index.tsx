@@ -28,14 +28,17 @@ export const CommonInput = css`
 
 export const Input = styled.input`
     ${CommonInput}
+    cursor: text;
 `
 
 export const Select = styled.select`
     ${CommonInput}
+    cursor: pointer;
 `
 
 export const Button = styled.button`
     ${CommonInput}
+    cursor: pointer;
 `
 
 export const GameBoardHeader = styled.div`
