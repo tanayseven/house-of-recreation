@@ -4,7 +4,7 @@
  *
  */
 type BugoutOpts = {
-    announce?: string[]
+  announce?: string[]
 }
 
 type SeenCallback = (address: string) => void
@@ -18,41 +18,41 @@ type RPCCallback = (address: string, callback: (...any) => void) => void
 type RPCResponseCallback = (address: string, none: string, response: Record<string, unknown>) => void
 
 type EventCallbacks =
-    | SeenCallback
-    | ServerCallback
-    | ConnectionsCallback
-    | MessageCallback
-    | PingCallback
-    | LeftCallback
-    | TimeoutCallback
-    | RPCCallback
-    | RPCResponseCallback
+  | SeenCallback
+  | ServerCallback
+  | ConnectionsCallback
+  | MessageCallback
+  | PingCallback
+  | LeftCallback
+  | TimeoutCallback
+  | RPCCallback
+  | RPCResponseCallback
 
 class Bugout {
-    constructor(identifier: string, opts?: BugoutOpts)
-    address(): string
+  constructor(identifier: string, opts?: BugoutOpts)
+  address(): string
     register(callName: string, func: Function, docString?: string): void //eslint-disable-line
     rpc(address: string, callName: string, args: Array<any>, callback: Function) //eslint-disable-line
-    send(address: string, message: string): void
-    send(message: string): void
-    heartbeat(milliseconds: number): void
-    destroy(callback?: () => void): void
-    on<CallbackType extends EventCallbacks>(eventName: string, callback: CallbackType) // implement this with generic for every event type
+  send(address: string, message: string): void
+  send(message: string): void
+  heartbeat(milliseconds: number): void
+  destroy(callback?: () => void): void
+  on<CallbackType extends EventCallbacks>(eventName: string, callback: CallbackType) // implement this with generic for every event type
 }
 
 declare module 'bugout' {
-    export default Bugout
-    export {
-        Bugout,
-        BugoutOpts,
-        SeenCallback,
-        ServerCallback,
-        ConnectionsCallback,
-        MessageCallback,
-        PingCallback,
-        LeftCallback,
-        TimeoutCallback,
-        RPCCallback,
-        RPCResponseCallback,
-    }
+  export default Bugout
+  export {
+    Bugout,
+    BugoutOpts,
+    SeenCallback,
+    ServerCallback,
+    ConnectionsCallback,
+    MessageCallback,
+    PingCallback,
+    LeftCallback,
+    TimeoutCallback,
+    RPCCallback,
+    RPCResponseCallback,
+  }
 }

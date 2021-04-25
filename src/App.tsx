@@ -23,25 +23,25 @@ const GlobalStyle = createGlobalStyle`
 `
 
 const App = (): JSX.Element => {
-    return (
-        <HashRouter>
-            <GlobalStyle />
-            <Route exact path="/">
-                <Home />
-            </Route>
-            <Route path="/tic-tac-toe/:roomId">
-                <TicTacToeView />
-            </Route>
-            <Route path="/create-game">
-                <CreateGameView />
-            </Route>
-            <Route path="/join-game">
-                <JoinGameView />
-            </Route>
-            <Route path="/about">
-                <About />
-            </Route>
-        </HashRouter>
-    )
+  return (
+    <HashRouter>
+      <GlobalStyle />
+      <Route exact path="/">
+        <Home />
+      </Route>
+      <Route path="/tic-tac-toe/:roomId">
+        <TicTacToeView />
+      </Route>
+      <Route path="/create-game">
+        <CreateGameView />
+      </Route>
+      <Route path="/join-game">
+        <JoinGameView />
+      </Route>
+      <Route path="/about">
+        <About />
+      </Route>
+    </HashRouter>
+  )
 }
 export default App

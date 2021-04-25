@@ -6,7 +6,7 @@ import { render } from '@testing-library/react'
 import App from './App'
 
 test('renders learn react link', () => {
-    const { getByText } = render(<App />)
-    expect(getByText(/Create game/i)).toBeInTheDocument()
-    expect(getByText(/Join game/i)).toBeInTheDocument()
+  const { getByText } = render(<App />)
+  expect(getByText(/Create game/i)).toBeInTheDocument()
+  expect(getByText(/Join game/i)).toBeInTheDocument()
 })
