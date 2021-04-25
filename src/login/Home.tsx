@@ -5,16 +5,23 @@
  */
 
 import React from 'react'
-import { Link } from 'react-router-dom'
-import { LoginContainer, MainContainer } from '../CustomStyled'
+import { Link, useHistory } from 'react-router-dom'
+import { Button, LoginContainer, MainContainer } from '../CustomStyled'
+import { LoginFooter, LoginHeader } from './Components'
 
 const Home = (): JSX.Element => {
+    const history = useHistory()
+    const goto = (path: string): void => {
+        history.push(path)
+    }
     return (
         <MainContainer>
             <LoginContainer>
-                <Link to="/create-game">Create Game</Link>
+                <LoginHeader />
+                <Button onClick={(): void => goto('/create-game')}>Create Game</Button>
                 <br />
-                <Link to="/join-game">Join Game</Link>
+                <Button onClick={(): void => goto('/join-game')}>Join Game</Button>
+                <LoginFooter />
             </LoginContainer>
         </MainContainer>
     )
