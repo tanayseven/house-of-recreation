@@ -8,9 +8,31 @@ import React, { useState } from 'react'
 import * as O from 'fp-ts/Option'
 import CommunicationClient, { ConnectionStatus, CreateRoom } from '../communication/CommunicationClient'
 import { pipe } from 'fp-ts/function'
-import { Button, Input, LoginContainer, MainContainer, Select } from '../CustomStyled'
+import { Button, Input, LoginContainer, MainContainer, Select, CopyButton, Label } from '../CustomStyled'
 import { LoginFooter, LoginHeader } from './Components'
 import Loader from '../Loader'
+import styled from 'styled-components'
+
+const ShortContainer = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+const RoomID = ({ id }: { id: string }): JSX.Element => {
+  const roomIdRef = React.createRef<HTMLInputElement>()
+  return (
+    <ShortContainer>
+      <Label width="70px">Room ID:</Label>
+      <Input ref={roomIdRef} value={id} readOnly width="200px" />
+      <CopyButton
+        onClick={(): void => {
+          roomIdRef.current?.select()
+          document.execCommand('copy')
+        }}
+      />
+    </ShortContainer>
+  )
+}
 
 const CreateGameView = (): JSX.Element => {
   const [userName, setUserName] = useState('')
@@ -53,7 +75,7 @@ const CreateGameView = (): JSX.Element => {
         <LoginContainer>
           {connectionStatus === 'offline' && roomId !== '' ? (
             <Loader>
-              <p>Room ID: {roomId}</p>
+              <RoomID id={roomId} />
             </Loader>
           ) : (
             <></>

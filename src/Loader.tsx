@@ -114,7 +114,6 @@ const Loader = ({ children }: Props): JSX.Element => {
     <Overlay>
       <MainContainer>
         <LoadingText>Loading</LoadingText>
-        <br />
         <PacmanAnimation />
         {children}
       </MainContainer>

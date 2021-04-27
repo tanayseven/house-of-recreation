@@ -17,8 +17,12 @@ export const LoginContainer = styled.div`
   max-width: 500px;
 `
 
-export const CommonInput = css`
-  width: 100%;
+interface CommonInputProps {
+  readonly width?: string
+}
+
+export const CommonInput = css<CommonInputProps>`
+  width: ${(props): string => (props.width ? props.width : '100%')};
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
@@ -32,9 +36,32 @@ export const Input = styled.input`
   cursor: text;
 `
 
+interface LabelProps {
+  readonly width?: string
+}
+
+export const Label = styled.label<LabelProps>`
+  padding: 10px 10px;
+  margin: 8px 0;
+  display: inline-block;
+  cursor: text;
+  width: ${(props): string => (props.width ? props.width : '100%')};
+`
+
 export const Select = styled.select`
   ${CommonInput}
   cursor: pointer;
+`
+
+export const CopyButton = styled.button`
+  ${CommonInput}
+  cursor: pointer;
+  width: 100px;
+  padding: 12px;
+  margin-left: 5px;
+  :after {
+    content: '📋 Copy';
+  }
 `
 
 export const Button = styled.button`
