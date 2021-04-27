@@ -10,6 +10,8 @@ import * as O from 'fp-ts/Option'
 import { pipe } from 'fp-ts/function'
 import { Button, Input, LoginContainer, MainContainer } from '../CustomStyled'
 import { LoginFooter, LoginHeader } from './Components'
+import Loader from '../Loader'
+import { RoomId } from './RoomId'
 
 const JoinGameView = (): JSX.Element => {
   const [roomId, setRoomId] = useState('')
@@ -36,6 +38,7 @@ const JoinGameView = (): JSX.Element => {
       ),
     )
     console.log('Room Joined')
+    setConnectionStatus('online')
   }
   pipe(
     communicationClient,
@@ -45,6 +48,13 @@ const JoinGameView = (): JSX.Element => {
     <>
       <MainContainer>
         <LoginContainer>
+          {connectionStatus === 'offline' && roomId !== '' ? (
+            <Loader>
+              <p>Waiting for the game to start</p>
+            </Loader>
+          ) : (
+            <></>
+          )}
           <LoginHeader />
           <Input
             placeholder="User name"

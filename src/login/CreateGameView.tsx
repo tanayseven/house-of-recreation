@@ -8,38 +8,17 @@ import React, { useState } from 'react'
 import * as O from 'fp-ts/Option'
 import CommunicationClient, { ConnectionStatus, CreateRoom } from '../communication/CommunicationClient'
 import { pipe } from 'fp-ts/function'
-import { Button, Input, LoginContainer, MainContainer, Select, CopyButton, Label } from '../CustomStyled'
+import { Button, Input, LoginContainer, MainContainer, Select } from '../CustomStyled'
 import { LoginFooter, LoginHeader } from './Components'
 import Loader from '../Loader'
-import styled from 'styled-components'
-
-const ShortContainer = styled.div`
-  display: flex;
-  align-items: center;
-`
-
-const RoomID = ({ id }: { id: string }): JSX.Element => {
-  const roomIdRef = React.createRef<HTMLInputElement>()
-  return (
-    <ShortContainer>
-      <Label width="70px">Room ID:</Label>
-      <Input ref={roomIdRef} value={id} readOnly width="200px" />
-      <CopyButton
-        onClick={(): void => {
-          roomIdRef.current?.select()
-          document.execCommand('copy')
-        }}
-      />
-    </ShortContainer>
-  )
-}
+import { RoomId } from './RoomId'
 
 const CreateGameView = (): JSX.Element => {
   const [userName, setUserName] = useState('')
   const [gameId, setGameId] = useState('')
   const [communicationClient, setCommunicationClient] = useState<O.Option<CommunicationClient>>(O.none)
   const [connectionStatus, setConnectionStatus] = useState<ConnectionStatus>('offline')
-    const redirectTo = (roomId: string): void => { //eslint-disable-line
+  const redirectTo = (roomId: string): void => { //eslint-disable-line
     const roomUrl = `/${gameId}/${roomId}`
     console.log('Changing room to ' + roomUrl)
     // history.push(roomUrl)
@@ -64,7 +43,7 @@ const CreateGameView = (): JSX.Element => {
   const connClientStateHandler = (newConnClientStateHandler: ConnectionStatus): void => {
     setConnectionStatus(newConnClientStateHandler)
   }
-    const roomId = pipe( //eslint-disable-line
+  const roomId = pipe( //eslint-disable-line
     communicationClient,
     O.map((obj) => obj.roomId),
     O.getOrElse(() => ''),
@@ -75,7 +54,7 @@ const CreateGameView = (): JSX.Element => {
         <LoginContainer>
           {connectionStatus === 'offline' && roomId !== '' ? (
             <Loader>
-              <RoomID id={roomId} />
+              <RoomId id={roomId} />
             </Loader>
           ) : (
             <></>
