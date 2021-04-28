@@ -17,7 +17,6 @@ export type Message = {  //eslint-disable-line
 type Peer = {
   address: string
   userName: string
-  ping: number
 }
 
 export type ConnectionStatus = 'offline' | 'online'
@@ -65,10 +64,14 @@ export default class CommunicationClient {
     this.bugout = new Bugout(`playindoor.games/${this.roomId}`, {
       announce: ['wss://playindoor-games-signalling.herokuapp.com/'],
     } as BugoutOpts)
-    this.bugout.register('i-am-the-server', (address: string): string => {
+    this.bugout.register('i-want-to-join-game', (address: string, userName: string): void => {
+      this.peers.set(address, { address: address, userName: userName } as Peer)
+      console.log(`new peer joined from ${address}`)
+    })
+    this.bugout.register('i-am-the-server', (address: string): void => {
       this.serverAddress = O.some(address)
       console.log(`found the server to be ${JSON.stringify(this.serverAddress)}`)
-      return this.selfName
+      this.bugout.rpc(address, 'i-want-to-join-game', [this.address, this.selfName], () => null)
     })
     this.bugout.on<SeenCallback>('seen', (address) => {
       if (isCreateRoom(action)) {
