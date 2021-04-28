@@ -7,6 +7,7 @@
 import Bugout, { BugoutOpts, SeenCallback } from 'bugout'
 import { v4 as uuid4 } from 'uuid'
 import * as O from 'fp-ts/Option'
+import { pipe } from 'fp-ts/function'
 
 export type Message = {  //eslint-disable-line
   fromUser: string
@@ -68,14 +69,23 @@ export default class CommunicationClient {
       this.peers.set(address, { address: address, userName: userName } as Peer)
       console.log(`new peer joined from ${address}`)
     })
-    this.bugout.register('i-am-the-server', (address: string): void => {
+    this.bugout.register('i-am-the-server', (address: string, game: GameType): void => {
+      console.log(`received ${address}, ${game}`)
       this.serverAddress = O.some(address)
-      console.log(`found the server to be ${JSON.stringify(this.serverAddress)}`)
+      this.game = O.some(game)
+      console.log(
+        `found the server to be ${JSON.stringify(this.serverAddress)} running the game ${JSON.stringify(game)}`,
+      )
       this.bugout.rpc(address, 'i-want-to-join-game', [this.address, this.selfName], () => null)
     })
     this.bugout.on<SeenCallback>('seen', (address) => {
       if (isCreateRoom(action)) {
-        this.bugout.rpc(address, 'i-am-the-server', [this.address], () => null)
+        const currentGame = pipe(
+          this.game,
+          O.getOrElse(() => 'no-game'),
+        )
+        console.log(`calling client to tell them ${this.address}, ${currentGame}`)
+        this.bugout.rpc(address, 'i-am-the-server', [this.address, currentGame], () => null)
         this.peers.set(address, { address: address, userName: '', ping: 0 } as Peer)
       }
     })

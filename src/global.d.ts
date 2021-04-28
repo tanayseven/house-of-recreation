@@ -31,8 +31,8 @@ type EventCallbacks =
 class Bugout {
   constructor(identifier: string, opts?: BugoutOpts)
   address(): string
-    register(callName: string, func: Function, docString?: string): void //eslint-disable-line
-    rpc(address: string, callName: string, args: Array<any>, callback: Function) //eslint-disable-line
+  register(callName: string, func: Function, docString?: string): void //eslint-disable-line
+  rpc(address: string, callName: string, args: Array<any>, callback: Function) //eslint-disable-line
   send(address: string, message: string): void
   send(message: string): void
   heartbeat(milliseconds: number): void
