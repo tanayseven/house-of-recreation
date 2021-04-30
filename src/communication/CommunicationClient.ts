@@ -65,18 +65,19 @@ export default class CommunicationClient {
     this.bugout = new Bugout(`playindoor.games/${this.roomId}`, {
       announce: ['wss://playindoor-games-signalling.herokuapp.com/'],
     } as BugoutOpts)
-    this.bugout.register('i-want-to-join-game', (address: string, userName: string): void => {
+    this.bugout.register('i-want-to-join-game', (address: string, args: [string]): void => {
+      const [userName] = args
       this.peers.set(address, { address: address, userName: userName } as Peer)
       console.log(`new peer joined from ${address}`)
     })
-    this.bugout.register('i-am-the-server', (address: string, game: GameType): void => {
-      console.log(`received ${address}, ${game}`)
+    this.bugout.register('i-am-the-server', (address: string, args: [GameType]): void => {
+      const [game] = args
       this.serverAddress = O.some(address)
       this.game = O.some(game)
       console.log(
         `found the server to be ${JSON.stringify(this.serverAddress)} running the game ${JSON.stringify(game)}`,
       )
-      this.bugout.rpc(address, 'i-want-to-join-game', [this.address, this.selfName], () => null)
+      this.bugout.rpc(address, 'i-want-to-join-game', [this.selfName], () => null)
     })
     this.bugout.on<SeenCallback>('seen', (address) => {
       if (isCreateRoom(action)) {
@@ -85,7 +86,7 @@ export default class CommunicationClient {
           O.getOrElse(() => 'no-game'),
         )
         console.log(`calling client to tell them ${this.address}, ${currentGame}`)
-        this.bugout.rpc(address, 'i-am-the-server', [this.address, currentGame], () => null)
+        this.bugout.rpc(address, 'i-am-the-server', [currentGame], () => null)
         this.peers.set(address, { address: address, userName: '', ping: 0 } as Peer)
       }
     })
