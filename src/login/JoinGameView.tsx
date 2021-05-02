@@ -23,7 +23,7 @@ const JoinGameView = (): JSX.Element => {
   const connClientStateHandler = (newConnClientStateHandler: ConnectionStatus): void => {
     setConnectionStatus(newConnClientStateHandler)
   }
-  const redirectToRoom = (): void => { //eslint-disable-line
+  const redirectToRoom = (): void => {
     pipe(
       activeGameContext.communicationClient,
       O.map((communicationClient_) => {
@@ -48,7 +48,6 @@ const JoinGameView = (): JSX.Element => {
       ),
     )
     console.log('Room Joined')
-    setConnectionStatus('online')
   }
   pipe(
     communicationClient,
