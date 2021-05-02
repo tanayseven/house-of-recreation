@@ -47,7 +47,7 @@ export default class CommunicationClient {
   private maxPeers: O.Option<number> = O.none
   readonly connectionStatusHandler: (peerName: string, status: ConnectionStatus) => void
   readonly selfName: string
-  private game: O.Option<GameType> = O.none
+  private gameType: O.Option<GameType> = O.none
   private serverAddress: O.Option<string> = O.none
 
   constructor(selfName: string, action: CreateRoom | JoinRoom) {
@@ -56,7 +56,7 @@ export default class CommunicationClient {
       console.log('creating room')
       this.maxPeers = O.some(action.maxPeers)
       this.roomId = uuid4()
-      this.game = O.some(action.game)
+      this.gameType = O.some(action.game)
     } else {
       console.log('joining room')
       // if action is JoinRoom
@@ -73,7 +73,7 @@ export default class CommunicationClient {
     this.bugout.register('i-am-the-server', (address: string, args: [GameType]): void => {
       const [game] = args
       this.serverAddress = O.some(address)
-      this.game = O.some(game)
+      this.gameType = O.some(game)
       console.log(
         `found the server to be ${JSON.stringify(this.serverAddress)} running the game ${JSON.stringify(game)}`,
       )
@@ -82,7 +82,7 @@ export default class CommunicationClient {
     this.bugout.on<SeenCallback>('seen', (address) => {
       if (isCreateRoom(action)) {
         const currentGame = pipe(
-          this.game,
+          this.gameType,
           O.getOrElse(() => 'no-game'),
         )
         console.log(`calling client to tell them ${this.address}, ${currentGame}`)
@@ -93,6 +93,10 @@ export default class CommunicationClient {
     this.connectionStatusHandler = action.connectionStatusHandler
     this.selfName = selfName
     this.address = this.bugout.address()
+  }
+
+  getGameType(): O.Option<GameType> {
+    return this.gameType
   }
 
   totalPeers(): number {

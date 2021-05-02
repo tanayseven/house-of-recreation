@@ -4,27 +4,38 @@
  *
  */
 
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import CommunicationClient, { ConnectionStatus, JoinRoom } from '../communication/CommunicationClient'
 import * as O from 'fp-ts/Option'
 import { pipe } from 'fp-ts/function'
 import { Button, Input, LoginContainer, MainContainer } from '../CustomStyled'
 import { LoginFooter, LoginHeader } from './Components'
 import Loader from '../Loader'
+import { ActiveGameContext } from '../ActiveGame'
+import { TicTacToe } from '../TicTacToe/Game'
 
 const JoinGameView = (): JSX.Element => {
   const [roomId, setRoomId] = useState('')
-  const [gameId, setGameId] = useState('') //eslint-disable-line
   const [userName, setUserName] = useState('')
   const [connectionStatus, setConnectionStatus] = useState<ConnectionStatus>('offline') //eslint-disable-line
+  const activeGameContext = useContext(ActiveGameContext)
   const [communicationClient, setCommunicationClient] = useState<O.Option<CommunicationClient>>(O.none)
   const connClientStateHandler = (newConnClientStateHandler: ConnectionStatus): void => {
     setConnectionStatus(newConnClientStateHandler)
   }
   const redirectToRoom = (): void => { //eslint-disable-line
-    const roomUrl = `/${gameId}/${roomId}`
-    console.log('Changing room to ' + roomUrl)
-    // history.push(roomUrl)
+    pipe(
+      activeGameContext.communicationClient,
+      O.map((communicationClient_) => {
+        pipe(
+          communicationClient_.getGameType(),
+          O.map((gameType) => {
+            const redirectUrl = `/${gameType}/${communicationClient_.roomId}`
+            console.log(`Redirecting to ${redirectUrl}`)
+          }),
+        )
+      }),
+    )
   }
   const joinRoom = (): void => {
     console.log('Joining Room')
@@ -43,6 +54,15 @@ const JoinGameView = (): JSX.Element => {
     communicationClient,
     O.map((obj) => console.log(obj)),
   )
+  if (connectionStatus === 'online') {
+    pipe(
+      communicationClient,
+      O.map((communicationClient_) => {
+        activeGameContext.setActiveGame(communicationClient_, new TicTacToe())
+        redirectToRoom()
+      }),
+    )
+  }
   return (
     <>
       <MainContainer>

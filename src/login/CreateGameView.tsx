@@ -4,7 +4,7 @@
  *
  */
 
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import * as O from 'fp-ts/Option'
 import CommunicationClient, { ConnectionStatus, CreateRoom } from '../communication/CommunicationClient'
 import { pipe } from 'fp-ts/function'
@@ -12,16 +12,28 @@ import { Button, Input, LoginContainer, MainContainer, Select } from '../CustomS
 import { LoginFooter, LoginHeader } from './Components'
 import Loader from '../Loader'
 import { RoomId } from './RoomId'
+import { ActiveGameContext } from '../ActiveGame'
+import { TicTacToe } from '../TicTacToe/Game'
 
 const CreateGameView = (): JSX.Element => {
   const [userName, setUserName] = useState('')
   const [gameId, setGameId] = useState('')
   const [communicationClient, setCommunicationClient] = useState<O.Option<CommunicationClient>>(O.none)
+  const activeGameContext = useContext(ActiveGameContext)
   const [connectionStatus, setConnectionStatus] = useState<ConnectionStatus>('offline')
-  const redirectTo = (roomId: string): void => { //eslint-disable-line
-    const roomUrl = `/${gameId}/${roomId}`
-    console.log('Changing room to ' + roomUrl)
-    // history.push(roomUrl)
+  const redirectToRoom = (): void => {
+    pipe(
+      activeGameContext.communicationClient,
+      O.map((communicationClient_) => {
+        pipe(
+          communicationClient_.getGameType(),
+          O.map((gameType) => {
+            const redirectUrl = `/${gameType}/${communicationClient_.roomId}`
+            console.log(`Redirecting to ${redirectUrl}`)
+          }),
+        )
+      }),
+    )
   }
   const createRoom = (): void => {
     console.log('Creating room')
@@ -30,7 +42,7 @@ const CreateGameView = (): JSX.Element => {
         new CommunicationClient(userName, {
           connectionStatusHandler: connClientStateHandler,
           maxPeers: 2,
-          game: 'tic-tac-toe',
+          game: gameId,
         } as CreateRoom),
       ),
     )
@@ -40,14 +52,24 @@ const CreateGameView = (): JSX.Element => {
     communicationClient,
     O.map((obj) => console.log(obj)),
   )
-  const connClientStateHandler = (newConnClientStateHandler: ConnectionStatus): void => {
-    setConnectionStatus(newConnClientStateHandler)
+  const connClientStateHandler = (connectionStatus_: ConnectionStatus): void => {
+    console.log(`Connection state updated from ${connectionStatus} to ${connectionStatus_}`)
+    setConnectionStatus(connectionStatus_)
   }
-  const roomId = pipe( //eslint-disable-line
+  const roomId = pipe(
     communicationClient,
     O.map((obj) => obj.roomId),
     O.getOrElse(() => ''),
   )
+  if (connectionStatus === 'online') {
+    pipe(
+      communicationClient,
+      O.map((communicationClient_) => {
+        activeGameContext.setActiveGame(communicationClient_, new TicTacToe())
+        redirectToRoom()
+      }),
+    )
+  }
   return (
     <>
       <MainContainer>

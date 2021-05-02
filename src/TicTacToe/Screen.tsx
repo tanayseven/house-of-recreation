@@ -1,48 +1,22 @@
 // Copyright (C) 2021  Tanay PrabhuDesai
 // Please refer to LICENSE.txt file for a complete copyright notice
 
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 import { Cell } from '../board/Cell'
 import { TicTacToe } from './Game'
-import { useParams } from 'react-router-dom'
 import { GameBoardContainer, GameBoardHeader, GameBoardMain, MainContainer } from '../CustomStyled'
-import { User, UserContext } from '../User'
-import CommunicationClient from '../communication/CommunicationClient'
-
-type Params = {
-  roomId: string
-}
+import { ActiveGameContext } from '../ActiveGame'
+import { pipe } from 'fp-ts/function'
+import * as O from 'fp-ts/Option'
 
 export const TicTacToeView = (): JSX.Element => {
-  const [game, setGame] = useState<TicTacToe>()
-    const { roomId } = useParams<Params>() //eslint-disable-line
-  const user = useContext<User>(UserContext)
-    const [commClient, setCommClient] = useState<CommunicationClient>() //eslint-disable-line
-
-  useEffect(() => {
-    if (typeof commClient != 'undefined' && commClient.totalPeers() === 2) {
-      setGame(new TicTacToe(user.username, 'someoeneElse'))
-    }
-  }, [commClient])
-
-  if (typeof game === 'undefined' && typeof commClient !== 'undefined')
-    return (
-      <>
-        <MainContainer>
-          <p>Room link: {commClient.roomId}</p>
-          <br />
-          <p>Loading...</p>
-        </MainContainer>
-      </>
-    )
-  if (typeof game === 'undefined')
-    return (
-      <>
-        <MainContainer>
-          <p>Loading...</p>
-        </MainContainer>
-      </>
-    )
+  const activeGameContext = useContext(ActiveGameContext)
+  const game = pipe(
+    activeGameContext.game,
+    O.map((game_) => game_ as TicTacToe),
+    O.getOrElseW(() => null),
+  )
+  if (game === null) return <></>
 
   return (
     <MainContainer>

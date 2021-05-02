@@ -2,13 +2,30 @@
 // Please refer to LICENSE.txt file for a complete copyright notice
 
 import { Game } from '../board/Game'
+import { Message } from '../communication/CommunicationClient'
+import * as O from 'fp-ts/Option'
+import { pipe } from 'fp-ts/function'
 
 type XO = ' ' | 'X' | 'O'
 
 export class TicTacToe implements Game {
-  constructor(player1: string, player2: string) {
-    this.players[0] = player1
-    this.players[1] = player2
+  private players: O.Option<Array<string>> = O.none
+  private receiveMessage: O.Option<(message: Message) => void> = O.none
+  private sendMessage: O.Option<(message: Message) => void> = O.none
+  setPlayers = (players: string[]): void => {
+    this.players = O.some(players)
+  }
+  setReceiveMessage = (handler: (message: Message) => void): void => {
+    this.receiveMessage = O.some(handler)
+  }
+  setSendMessage = (handler: (message: Message) => void): void => {
+    this.sendMessage = O.some(handler)
+  }
+  start = (): void => {
+    console.log(`Game started`)
+  }
+  end = (): void => {
+    console.log(`Game over`)
   }
 
   cells: Array<Array<XO>> = [
@@ -16,8 +33,6 @@ export class TicTacToe implements Game {
     [' ', ' ', ' '],
     [' ', ' ', ' '],
   ]
-
-  players = ['', '']
 
   currentPlayerIndex = 0
 
@@ -28,7 +43,7 @@ export class TicTacToe implements Game {
   }
 
   play(row: number, column: number): void {
-    this.currentPlayerIndex = (this.currentPlayerIndex + 1) % this.players.length
+    // this.currentPlayerIndex = (this.currentPlayerIndex + 1) % this.players.length
     if (this.canPlay(row, column)) this.cells[row][column] = this.playerSigns[this.currentPlayerIndex]
   }
 
@@ -49,6 +64,10 @@ export class TicTacToe implements Game {
   }
 
   currentPlayer(): string {
-    return this.players[this.currentPlayerIndex]
+    return pipe(
+      this.players,
+      O.map((players) => players[0]),
+      O.getOrElse(() => 'no player'),
+    )
   }
 }

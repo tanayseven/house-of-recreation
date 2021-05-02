@@ -9,6 +9,7 @@ import { createGlobalStyle } from 'styled-components'
 import Home from './login/Home'
 import CreateGameView from './login/CreateGameView'
 import JoinGameView from './login/JoinGameView'
+import { ActiveGame, ActiveGameContext } from './ActiveGame'
 
 const GlobalStyle = createGlobalStyle`
     body, html {
@@ -24,24 +25,26 @@ const GlobalStyle = createGlobalStyle`
 
 const App = (): JSX.Element => {
   return (
-    <HashRouter>
-      <GlobalStyle />
-      <Route exact path="/">
-        <Home />
-      </Route>
-      <Route path="/tic-tac-toe/:roomId">
-        <TicTacToeView />
-      </Route>
-      <Route path="/create-game">
-        <CreateGameView />
-      </Route>
-      <Route path="/join-game">
-        <JoinGameView />
-      </Route>
-      <Route path="/about">
-        <About />
-      </Route>
-    </HashRouter>
+    <ActiveGameContext.Provider value={new ActiveGame()}>
+      <HashRouter>
+        <GlobalStyle />
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route path="/tic-tac-toe/:roomId">
+          <TicTacToeView />
+        </Route>
+        <Route path="/create-game">
+          <CreateGameView />
+        </Route>
+        <Route path="/join-game">
+          <JoinGameView />
+        </Route>
+        <Route path="/about">
+          <About />
+        </Route>
+      </HashRouter>
+    </ActiveGameContext.Provider>
   )
 }
 export default App
